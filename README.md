@@ -1,2 +1,3 @@
 # MonopolyDeal
-Python based Monopoly Deal
+Python based Monopoly Deal 
+Desktop Version 0.1
