@@ -1,11 +1,13 @@
 import random
+from enum import Enum
 
 class money_card():
 	def __init__(self, value):
 		self.value = value
 
 class action_card(money_card):
-	def __init__(self, value, name, description):
+	def __init__(self, value, name
+		, description):
 		super().__init__(value)
 		self.name = name
 		self.description = description
@@ -107,10 +109,10 @@ deck = {
 	61: property_card(4, "Pacific Avenue", property.GREEN, [2,4, 7], True),
 	62: property_card(4, "North Carolina Avenue", property.GREEN, [2,4, 7], True),
 	63: property_card(4, "Park Place", property.DBLUE, [3, 8], True), 
-	64: property_card(4, "Boardwalk", property.DBLUE, [3, 8], True), 
+	64: property_card(4, "Boardwalk", property.DBLUE, [3, 8], True)
 	65: property_wild(0, property.ALL, property.ALL), 
 	66: property_wild(0, property.ALL, property.ALL), 
-	67: property_wild(4, property.RR, property.LBLUE), 
+	67: property_wild(4, deck[39], deck[45]),
 	68: property_wild(2, property.RR, property.UTIL), 
 	69: property_wild(4, property.RR, property.GREEN), 
 	70: property_wild(4, property.GREEN, property.BLUE), 
@@ -131,7 +133,7 @@ deck = {
 	85: rent_card(1, set(property.PURPLE, property.ORANGE), False),
 	86: rent_card(3, set(property.ALL), True), 
 	87: rent_card(3, set(property.ALL), True), 
-	88: rent_card(3, set(property.ALL), True), 
+	88: rent_card(3, set(property.ALL), True),
 	89: money_card(1),
 	90: money_card(1),
 	91: money_card(1),
@@ -153,6 +155,7 @@ deck = {
 	107: money_card(5),
 	108: money_card(10)
 }
+
 
 def shuffle_deck():
 	game_deck = list(deck.keys())
