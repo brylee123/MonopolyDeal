@@ -1,17 +1,17 @@
 import random
 from enum import Enum
 
-
 class money_card():
 	def __init__(self, value):
 		self.value = value
 
 class action_card(money_card):
-	def __init__(self, value, name
-		, description):
+	def __init__(self, value, name, description):
 		super().__init__(value)
 		self.name = name
 		self.description = description
+	def get_details(self):
+		print(self.name + ": " + self.description)
 
 class property_type():
 	def __init__(self, color, rent, buildable):
@@ -20,13 +20,13 @@ class property_type():
 		self.buildable = buildable
 
 class property_card(money_card):
-	def __init__(self, value, name=None, property1, property2=None):
+	def __init__(self, value, property1, property2=None, name=None):
 		super().__init__(value)
-		self.name = name
 		self.property1 = property1
 		self.property2 = property2
+		self.name = name
 		self.wild = False
-		if property2 not None:
+		if not property2 == None:
 			name = "Wild Card" 
 			self.wild = True
 
@@ -38,7 +38,7 @@ class rent_card(money_card):
 
 class property(Enum):
 	RED = "red"
-	DBLUE = "darkblue"
+	BLUE = "darkblue"
 	LBLUE = "lightblue"
 	PURPLE = "purple"
 	GREEN = "green"
@@ -125,7 +125,7 @@ deck = {
 	61: property_card(4, "Pacific Avenue", green, None),
 	62: property_card(4, "North Carolina Avenue", green, None),
 	63: property_card(4, "Park Place", blue, None), 
-	64: property_card(4, "Boardwalk", blue, None)
+	64: property_card(4, "Boardwalk", blue, None),
 	65: property_card(0, None, wild, wild), 
 	66: property_card(0, None, wild, wild), 
 	67: property_card(4, None, railroad, blue),
@@ -137,19 +137,19 @@ deck = {
 	73: property_card(1, None, light_blue, brown), 
 	74: property_card(2, None, purple, orange), 
 	75: property_card(2, None, purple, orange), 
-	76: rent_card(1, set(brown, light_blue), False),
-	77: rent_card(1, set(brown, light_blue), False),
-	78: rent_card(1, set(red, yellow), False),
-	79: rent_card(1, set(red, yellow), False),
-	80: rent_card(1, set(green, util), False),
-	81: rent_card(1, set(green, util), False),
-	82: rent_card(1, set(railroad, util), False),
-	83: rent_card(1, set(railroad, util), False),
-	84: rent_card(1, set(purple, orange), False),
-	85: rent_card(1, set(purple, orange), False),
-	86: rent_card(3, set(wild), True), 
-	87: rent_card(3, set(wild), True), 
-	88: rent_card(3, set(wild), True),
+	76: rent_card(1, {brown, light_blue}, False),
+	77: rent_card(1, {brown, light_blue}, False),
+	78: rent_card(1, {red, yellow}, False),
+	79: rent_card(1, {red, yellow}, False),
+	80: rent_card(1, {green, util}, False),
+	81: rent_card(1, {green, util}, False),
+	82: rent_card(1, {railroad, util}, False),
+	83: rent_card(1, {railroad, util}, False),
+	84: rent_card(1, {purple, orange}, False),
+	85: rent_card(1, {purple, orange}, False),
+	86: rent_card(3, {wild}, True), 
+	87: rent_card(3, {wild}, True), 
+	88: rent_card(3, {wild}, True),
 	89: money_card(1),
 	90: money_card(1),
 	91: money_card(1),
@@ -172,6 +172,8 @@ deck = {
 	108: money_card(10)
 }
 
+def get_card(n):
+	return deck[n]
 
 def shuffle_deck():
 	game_deck = list(deck.keys())
