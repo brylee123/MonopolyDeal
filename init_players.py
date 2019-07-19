@@ -27,10 +27,16 @@ def validate_input(input_txt, condition, err_msg):
 	return user_input
 
 def initialize_player_data():
-	player_count = validate_input("Enter player count: ", input_conditions.PLAYER_COUNT, "Please enter a valid number between 2 and 5")
-	player_count = int(player_count)
+	#player_count = validate_input("Enter player count: ", input_conditions.PLAYER_COUNT, "Please enter a valid number between 2 and 5")
+	#player_count = int(player_count)
 
-	players = []
+	########################################
+	player_count = 5
+	players = ["jim","bob", "carrie", "veronica", "kim"]
+	#DELETE
+	########################################
+
+	'''
 	for i in range(1, player_count+1):
 		player_name = validate_input("Enter player "+str(i)+"'s name: ", input_conditions.USER_NAME, "Please enter an alphanumeric string less than 10 characters")
 		
@@ -38,7 +44,7 @@ def initialize_player_data():
 			print("Players cannot have the same name as existing players. Think harder and be unique.")
 			player_name = validate_input("Enter player "+str(i)+"'s name: ", input_conditions.USER_NAME, "Please enter an alphanumeric string less than 10 characters")
 		players.append(player_name)
-
+	'''
 	print("\n\nAll set! Here are the players!")
 	for i in range(1, player_count+1):
 		print("Player "+ str(i) +": "+players[i-1])
