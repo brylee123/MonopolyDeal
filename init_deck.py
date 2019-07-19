@@ -1,6 +1,7 @@
 import random
 from enum import Enum
 
+
 class money_card():
 	def __init__(self, value):
 		self.value = value
@@ -12,19 +13,22 @@ class action_card(money_card):
 		self.name = name
 		self.description = description
 
-class property_card(money_card):
-	def __init__(self, value, name, color, rent, buildable):
-		super().__init__(value)
-		self.name = name
+class property_type():
+	def __init__(self, color, rent, buildable):
 		self.color = color
 		self.rent = rent
 		self.buildable = buildable
 
-class property_wild(property_card):
-	def __init__(self, value, property1, property2):
+class property_card(money_card):
+	def __init__(self, value, name=None, property1, property2=None):
 		super().__init__(value)
+		self.name = name
 		self.property1 = property1
 		self.property2 = property2
+		self.wild = False
+		if property2 not None:
+			name = "Wild Card" 
+			self.wild = True
 
 class rent_card(money_card):
 	def __init__(self, value, color, wild):
@@ -44,6 +48,18 @@ class property(Enum):
 	RR = "railroad"
 	UTIL = "utility"
 	ALL = "all"
+
+util = property_type(property.UTIL, [1, 2], False)
+railroad = property_type(property.RR, [1, 2, 3, 4], False)
+brown = property_type(property.BROWN, [1, 2], True)
+light_blue = property_type(property.LBLUE, [1, 2, 3], True)
+purple = property_type(property.PURPLE, [1, 2, 4], True)
+orange = property_type(property.ORANGE, [1, 3, 5], True)
+red = property_type(property.RED, [1, 2, 4], True)
+yellow = property_type(property.YELLOW, [2, 4, 6], True)
+green = property_type(property.GREEN, [2, 4, 7], True)
+blue = property_type(property.BLUE, [3, 8], True)
+wild = property_type(property.ALL, None, None)
 
 deck = {
 	1: action_card(3, "House", "Add onto any full set you own to add $3M to rent value. (Except Railroads and Utilities)"), 
@@ -82,58 +98,58 @@ deck = {
 	34: action_card(1, "Pass Go", "Draw two extra cards!"), 
 	35: action_card(1, "Pass Go", "Draw two extra cards!"), 
 	36: action_card(1, "Pass Go", "Draw two extra cards!"),
-	37: property_card(2, "Electric Company", property.UTIL, [1, 2], True), 
-	38: property_card(2, "Waterworks", property.UTIL, [1, 2], True), 
-	39: property_card(2, "Pennsylvania Railroad", property.RR, [1,2,3, 4], True), 
-	40: property_card(2, "Reading Railroad", property.RR, [1,2,3, 4], True), 
-	41: property_card(2, "B. & O. Railroad", property.RR, [1,2,3, 4], True), 
-	42: property_card(2, "Short Line Railroad", property.RR, [1,2,3, 4], True), 
-	43: property_card(1, "Baltic Avenue", property.BROWN, [1, 2], True), 
-	44: property_card(1, "Mediterranean Avenue", property.BROWN, [1, 2], True), 
-	45: property_card(1, "Oriental Avenue", property.LBLUE, [1,2, 3], True),
-	46: property_card(1, "Connecticut Avenue", property.LBLUE, [1,2, 3], True),
-	47: property_card(1, "Vermont Avenue", property.LBLUE, [1,2, 3], True),
-	48: property_card(2, "States Avenue", property.PURPLE, [1,2, 4], True),
-	49: property_card(2, "Virginia Avenue", property.PURPLE, [1,2, 4], True),
-	50: property_card(2, "St. Charles Place", property.PURPLE, [1,2, 4], True),
-	51: property_card(2, "St. James Place", property.ORANGE, [1,3, 5], True),
-	52: property_card(2, "Tennessee Avenue", property.ORANGE, [1,3, 5], True),
-	53: property_card(2, "New York Avenue", property.ORANGE, [1,3, 5], True),
-	54: property_card(3, "Indiana Avenue", property.RED, [2,3, 6], True),
-	55: property_card(3, "Illinois Avenue", property.RED, [2,3, 6], True),
-	56: property_card(3, "Kentucky Avenue", property.RED, [2,3, 6], True),
-	57: property_card(3, "Atlantic Avenue", property.YELLOW, [2,4,6], True),
-	58: property_card(3, "Marvin Gardens", property.YELLOW, [2,4,6], True),
-	59: property_card(3, "Ventnor Avenue", property.YELLOW, [2,4,6], True),
-	60: property_card(4, "Pennsylvania Avenue", property.GREEN, [2,4, 7], True),
-	61: property_card(4, "Pacific Avenue", property.GREEN, [2,4, 7], True),
-	62: property_card(4, "North Carolina Avenue", property.GREEN, [2,4, 7], True),
-	63: property_card(4, "Park Place", property.DBLUE, [3, 8], True), 
-	64: property_card(4, "Boardwalk", property.DBLUE, [3, 8], True)
-	65: property_wild(0, property.ALL, property.ALL), 
-	66: property_wild(0, property.ALL, property.ALL), 
-	67: property_wild(4, deck[39], deck[45]),
-	68: property_wild(2, property.RR, property.UTIL), 
-	69: property_wild(4, property.RR, property.GREEN), 
-	70: property_wild(4, property.GREEN, property.BLUE), 
-	71: property_wild(3, property.YELLOW, property.RED), 
-	72: property_wild(3, property.YELLOW, property.RED), 
-	73: property_wild(1, property.LBLUE, property.BROWN), 
-	74: property_wild(2, property.PURPLE, property.ORANGE), 
-	75: property_wild(2, property.PURPLE, property.ORANGE), 
-	76: rent_card(1, set(property.BROWN, property.LBLUE), False),
-	77: rent_card(1, set(property.BROWN, property.LBLUE), False),
-	78: rent_card(1, set(property.RED, property.YELLOW), False),
-	79: rent_card(1, set(property.RED, property.YELLOW), False),
-	80: rent_card(1, set(property.GREEN, property.DBLUE), False),
-	81: rent_card(1, set(property.GREEN, property.DBLUE), False),
-	82: rent_card(1, set(property.RR, property.UTIL), False),
-	83: rent_card(1, set(property.RR, property.UTIL), False),
-	84: rent_card(1, set(property.PURPLE, property.ORANGE), False),
-	85: rent_card(1, set(property.PURPLE, property.ORANGE), False),
-	86: rent_card(3, set(property.ALL), True), 
-	87: rent_card(3, set(property.ALL), True), 
-	88: rent_card(3, set(property.ALL), True),
+	37: property_card(2, "Electric Company", util, None), 
+	38: property_card(2, "Waterworks", util, None), 
+	39: property_card(2, "Pennsylvania Railroad", railroad, None), 
+	40: property_card(2, "R eading Railroad", railroad, None), 
+	41: property_card(2, "B. & O. Railroad", railroad, None), 
+	42: property_card(2, "Short Line Railroad", railroad, None), 
+	43: property_card(1, "Baltic Avenue", brown, None), 
+	44: property_card(1, "Mediterranean Avenue", brown, None), 
+	45: property_card(1, "Oriental Avenue", light_blue, None),
+	46: property_card(1, "Connecticut Avenue", light_blue, None),
+	47: property_card(1, "Vermont Avenue", light_blue, None),
+	48: property_card(2, "States Avenue", purple, None),
+	49: property_card(2, "Virginia Avenue", purple, None),
+	50: property_card(2, "St. Charles Place", purple, None),
+	51: property_card(2, "St. James Place", orange, None),
+	52: property_card(2, "Tennessee Avenue", orange, None),
+	53: property_card(2, "New York Avenue", orange, None),
+	54: property_card(3, "Indiana Avenue", red, None),
+	55: property_card(3, "Illinois Avenue", red, None),
+	56: property_card(3, "Kentucky Avenue", red, None),
+	57: property_card(3, "Atlantic Avenue", yellow, None),
+	58: property_card(3, "Marvin Gardens", yellow, None),
+	59: property_card(3, "Ventnor Avenue", yellow, None),
+	60: property_card(4, "Pennsylvania Avenue", green, None),
+	61: property_card(4, "Pacific Avenue", green, None),
+	62: property_card(4, "North Carolina Avenue", green, None),
+	63: property_card(4, "Park Place", blue, None), 
+	64: property_card(4, "Boardwalk", blue, None)
+	65: property_card(0, None, wild, wild), 
+	66: property_card(0, None, wild, wild), 
+	67: property_card(4, None, railroad, blue),
+	68: property_card(2, None, railroad, util), 
+	69: property_card(4, None, railroad, green), 
+	70: property_card(4, None, green, blue), 
+	71: property_card(3, None, yellow, red), 
+	72: property_card(3, None, yellow, red), 
+	73: property_card(1, None, light_blue, brown), 
+	74: property_card(2, None, purple, orange), 
+	75: property_card(2, None, purple, orange), 
+	76: rent_card(1, set(brown, light_blue), False),
+	77: rent_card(1, set(brown, light_blue), False),
+	78: rent_card(1, set(red, yellow), False),
+	79: rent_card(1, set(red, yellow), False),
+	80: rent_card(1, set(green, util), False),
+	81: rent_card(1, set(green, util), False),
+	82: rent_card(1, set(railroad, util), False),
+	83: rent_card(1, set(railroad, util), False),
+	84: rent_card(1, set(purple, orange), False),
+	85: rent_card(1, set(purple, orange), False),
+	86: rent_card(3, set(wild), True), 
+	87: rent_card(3, set(wild), True), 
+	88: rent_card(3, set(wild), True),
 	89: money_card(1),
 	90: money_card(1),
 	91: money_card(1),
