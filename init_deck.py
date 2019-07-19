@@ -10,8 +10,6 @@ class action_card(money_card):
 		super().__init__(value)
 		self.name = name
 		self.description = description
-	def get_details(self):
-		print(self.name + ": " + self.description)
 
 class property_type():
 	def __init__(self, color, rent, buildable):
@@ -20,14 +18,13 @@ class property_type():
 		self.buildable = buildable
 
 class property_card(money_card):
-	def __init__(self, value, property1, property2=None, name=None):
+	def __init__(self, value, name, property1, property2=None):
 		super().__init__(value)
 		self.property1 = property1
 		self.property2 = property2
 		self.name = name
 		self.wild = False
 		if not property2 == None:
-			name = "Wild Card" 
 			self.wild = True
 
 class rent_card(money_card):
@@ -37,17 +34,17 @@ class rent_card(money_card):
 		self.wild = wild # Boolean - Targeting
 
 class property(Enum):
-	RED = "red"
-	BLUE = "darkblue"
-	LBLUE = "lightblue"
-	PURPLE = "purple"
-	GREEN = "green"
-	ORANGE = "orange"
-	YELLOW = "yellow"
-	BROWN = "brown"
-	RR = "railroad"
-	UTIL = "utility"
-	ALL = "all"
+	RED = "Red"
+	BLUE = "Dark Blue"
+	LBLUE = "Light Blue"
+	PURPLE = "Purple"
+	GREEN = "Green"
+	ORANGE = "Orange"
+	YELLOW = "Yellow"
+	BROWN = "Brown"
+	RR = "Railroad"
+	UTIL = "Utility"
+	ALL = "All"
 
 util = property_type(property.UTIL, [1, 2], False)
 railroad = property_type(property.RR, [1, 2, 3, 4], False)
@@ -126,30 +123,30 @@ deck = {
 	62: property_card(4, "North Carolina Avenue", green, None),
 	63: property_card(4, "Park Place", blue, None), 
 	64: property_card(4, "Boardwalk", blue, None),
-	65: property_card(0, None, wild, wild), 
-	66: property_card(0, None, wild, wild), 
-	67: property_card(4, None, railroad, blue),
-	68: property_card(2, None, railroad, util), 
-	69: property_card(4, None, railroad, green), 
-	70: property_card(4, None, green, blue), 
-	71: property_card(3, None, yellow, red), 
-	72: property_card(3, None, yellow, red), 
-	73: property_card(1, None, light_blue, brown), 
-	74: property_card(2, None, purple, orange), 
-	75: property_card(2, None, purple, orange), 
-	76: rent_card(1, {brown, light_blue}, False),
-	77: rent_card(1, {brown, light_blue}, False),
-	78: rent_card(1, {red, yellow}, False),
-	79: rent_card(1, {red, yellow}, False),
-	80: rent_card(1, {green, util}, False),
-	81: rent_card(1, {green, util}, False),
-	82: rent_card(1, {railroad, util}, False),
-	83: rent_card(1, {railroad, util}, False),
-	84: rent_card(1, {purple, orange}, False),
-	85: rent_card(1, {purple, orange}, False),
-	86: rent_card(3, {wild}, True), 
-	87: rent_card(3, {wild}, True), 
-	88: rent_card(3, {wild}, True),
+	65: property_card(0, "Wild Card", wild, wild), 
+	66: property_card(0, "Wild Card", wild, wild), 
+	67: property_card(4, "Wild Card", railroad, blue),
+	68: property_card(2, "Wild Card", railroad, util), 
+	69: property_card(4, "Wild Card", railroad, green), 
+	70: property_card(4, "Wild Card", green, blue), 
+	71: property_card(3, "Wild Card", yellow, red), 
+	72: property_card(3, "Wild Card", yellow, red), 
+	73: property_card(1, "Wild Card", light_blue, brown), 
+	74: property_card(2, "Wild Card", purple, orange), 
+	75: property_card(2, "Wild Card", purple, orange), 
+	76: rent_card(1, {property.BROWN, property.LBLUE}, False),
+	77: rent_card(1, {property.BROWN, property.LBLUE}, False),
+	78: rent_card(1, {property.RED, property.YELLOW}, False),
+	79: rent_card(1, {property.RED, property.YELLOW}, False),
+	80: rent_card(1, {property.GREEN, property.BLUE}, False),
+	81: rent_card(1, {property.GREEN, property.BLUE}, False),
+	82: rent_card(1, {property.RR, property.UTIL}, False),
+	83: rent_card(1, {property.RR, property.UTIL}, False),
+	84: rent_card(1, {property.PURPLE, property.ORANGE}, False),
+	85: rent_card(1, {property.PURPLE, property.ORANGE}, False),
+	86: rent_card(3, {property.ALL}, True), 
+	87: rent_card(3, {property.ALL}, True), 
+	88: rent_card(3, {property.ALL}, True), 
 	89: money_card(1),
 	90: money_card(1),
 	91: money_card(1),
