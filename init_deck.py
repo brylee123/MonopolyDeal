@@ -65,7 +65,7 @@ deck = {
 	4: action_card(4, "Hotel", "Add onto any full set you own to add $4M to rent value. (Except Railroads and Utilities)"), 
 	5: action_card(4, "Hotel", "Add onto any full set you own to add $4M to rent value. (Except Railroads and Utilities)"), 
 	6: action_card(4, "Hotel", "Add onto any full set you own to add $4M to rent value. (Except Railroads and Utilities)"), 
-	7: action_card(2, "It's me birthday!", "All players give you $2M as a gift."), 
+	7: action_card(2, "It's my birthday!", "All players give you $2M as a gift."), 
 	8: action_card(2, "It's my birthday!", "All players give you $2M as a gift."),
 	9: action_card(2, "It's my birthday!", "All players give you $2M as a gift."),
 	10: action_card(1, "Double the Rent", "Needs to be played with a rent card."), 

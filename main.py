@@ -14,7 +14,7 @@ def display_card(n):
 	# Add print values of each card.
 
 	if isinstance(card, init_deck.action_card):
-		card.get_details()
+		card.get_details(n)
 		pass
 
 	elif isinstance(card, init_deck.property_card):
@@ -41,7 +41,7 @@ def display_card(n):
 	return card_details
 
 if __name__ == '__main__':
-	game_deck = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+	#game_deck = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 	game_deck = init_deck.shuffle_deck()
 	
 	print("Welcome to Monopoly Deal!")
