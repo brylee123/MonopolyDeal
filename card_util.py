@@ -5,7 +5,7 @@ def draw2(game_deck):
 	card1 = game_deck.pop()
 	card2 = game_deck.pop()
 
-	return card1, card2
+	return [card1, card2]
 
 def draw5(game_deck):
 	# Use for dealing in the beginning and if player has no cards
@@ -15,14 +15,14 @@ def draw5(game_deck):
 	card4 = game_deck.pop()
 	card5 = game_deck.pop()
 
-	return card1, card2, card3, card4, card5
+	return [card1, card2, card3, card4, card5]
 
 def display_card(n):
 	card = init_deck.get_card(n)
 	card_details = 0
-	print(type(card).__name__) # Class Name
-	print(vars(card)) # Object Attributes/Member Variables
-
+	#print(type(card).__name__) # Class Name
+	#print(vars(card)) # Object Attributes/Member Variables
+	#print(n)
 	information = ""	# Add print values of each card.
 
 	# If action_card
@@ -34,7 +34,8 @@ def display_card(n):
 
 		property_details1 = card.property1.color.value
 
-		if card.wild:
+		# Property wild card - 10 colors
+		if n == 65 or n == 66:
 			print("Wild Card. This card can be used as part of any property set. This card has no monetary value.")
 			return
 
@@ -62,7 +63,7 @@ def display_card(n):
 
 	# If money_card
 	elif isinstance(card, init_deck.money_card):
-		information = "[$"+str(card.value)+"] "
+		information = "[$"+str(card.value)+"] Money"
 
 	print(information)
 	return

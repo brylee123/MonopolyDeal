@@ -4,6 +4,14 @@ class input_conditions(Enum):
 	PLAYER_COUNT = 1
 	USER_NAME = 2
 
+class player():
+	def __init__(self, number, name, hand, property_field, money_field):
+		self.number = number
+		self.name = name
+		self.hand = hand
+		self.property_field = property_field
+		self.money_field = money_field
+
 def validate_input(input_txt, condition, err_msg):
 	user_input = input(input_txt)
 
@@ -28,6 +36,7 @@ def validate_input(input_txt, condition, err_msg):
 
 def initialize_player_data():
 	'''
+	players = []
 	player_count = validate_input("Enter player count: ", input_conditions.PLAYER_COUNT, "Please enter a valid number between 2 and 5")
 	player_count = int(player_count)
 
@@ -37,16 +46,24 @@ def initialize_player_data():
 		while player_name in players:
 			print("Players cannot have the same name as existing players. Think harder and be unique.")
 			player_name = validate_input("Enter player "+str(i)+"'s name: ", input_conditions.USER_NAME, "Please enter an alphanumeric string less than 10 characters")
-		players.append(player_name)
-	'''
+		
+		players.append(player(i, player_name, [], [], []))
 
+	
+	'''
 	########################################
 	player_count = 5
-	players = ["jim","bob", "carrie", "veronica", "kim"]
+	players = [	player(1, "alice", [], [], []),
+				player(2, "bob", [], [], []), 
+				player(3, "carrie", [], [], []), 
+				player(4, "doris", [], [], []),
+				player(5, "edith", [], [], [])]
 	#DELETE
 	########################################
+	
 
 	print("\n\nAll set! Here are the players!")
 	for i in range(player_count):
-		print("Player "+ str(i+1) +": "+players[i])
+		print("Player "+ str(i+1) +": ", players[i].name)
+
 	return players

@@ -1,18 +1,25 @@
 import init_deck
 import init_players
 import card_util
-import pprint
+#import pprint
 
 if __name__ == '__main__':
-	#game_deck = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 	game_deck = init_deck.shuffle_deck()
 	
 	print("Welcome to Monopoly Deal!")
 	players = init_players.initialize_player_data()
-	for i in players:
-		for j in card_util.draw5(game_deck):
-			card_util.display_card(j)
-			print("\n")
-			
+	for player in players:
+		print(player.name)
+		player.hand = card_util.draw5(game_deck)
+
+		for card in player.hand:
+			card_util.display_card(card)
 		print("=========================================")
 			
+	# Player hands shound be initialized at this point
+
+	while True:
+		for player in players:
+			player.hand.extend(card_util.draw2(game_deck))
+			print(player.hand)
+		break
